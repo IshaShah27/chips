@@ -7,17 +7,16 @@ class MoviesController < ApplicationController
   end
 
   def index
-    byebug
     @movies = Movie.all
     @all_ratings = %w[G PG PG-13 R]
     #@all_ratings = Movie.all_ratings
-#     if params[:ratings].has_key?nil
-#       @ratings_to_show = []
-#       @movies = Movie.all
-#     else
-#       @ratings_to_show = params[:ratings].keys 
-#       @movies = Movie.with_ratings(@ratings_to_show)
-#     end
+    if params[:ratings]==nil
+      @ratings_to_show = []
+      @movies = Movie.all
+    else
+      @ratings_to_show = params[:ratings].keys 
+      @movies = Movie.with_ratings(@ratings_to_show)
+    end
   end
 
   def new
