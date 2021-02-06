@@ -1,6 +1,6 @@
 class Movie < ActiveRecord::Base
   
-  def get_all_ratings
+  def self.get_all_ratings
     return ['G','PG','PG-13','R']
   end
   
@@ -9,10 +9,10 @@ class Movie < ActiveRecord::Base
     #  movies with those ratings
     
     if ratings_list.length > 0
-      return Movie.where(grade: ratings_list)
+      return Movie.where(rating: ratings_list)
     else
     # if ratings_list is nil, retrieve ALL movies
-      return Movie.all
+      return Movie
     end
 
   end
