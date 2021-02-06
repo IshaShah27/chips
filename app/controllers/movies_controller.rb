@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
     #@movies = Movie.all
     @all_ratings = %w[G PG PG-13 R]
     #@all_ratings = Movie.all_ratings
-    if params[:ratings].nil?
+    if params[:ratings].has_key?nil
       @ratings_to_show = []
     else
       @ratings_to_show = params[:ratings].keys 
