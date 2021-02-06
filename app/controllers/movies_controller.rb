@@ -17,7 +17,17 @@ class MoviesController < ApplicationController
       @ratings_to_show = params[:ratings].keys 
       @movies = Movie.with_ratings(@ratings_to_show)
     end
-    @movies = @movies.order(params[:sort])
+    if params[:sort] != nil
+      @movies = @movies.order(params[:sort])
+      if params[:sort] == "title"
+        @title_highlight = "hilite"
+      end
+      if params[:sort] == "release_date"
+        @date_highlight = "hilite"
+      end
+    end
+        
+      
   end
 
   def new

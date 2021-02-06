@@ -17,9 +17,9 @@
 <table class="table table-striped col-md-12" id="movies">
   <thead>
     <tr>
-      <th><%= link_to "Movie Title", :sort => "title" %></th>
+      <th><%= link_to "Movie Title", :sort => "title", :class => @title_highlight %></th>
       <th>Rating</th>
-      <th><%= link_to "Release Date", :sort => "date" %></th>
+      <th><%= link_to "Release Date", :sort => "release_date", :class => @date_highlight %></th>
       <th>More Info</th>
     </tr>
   </thead>
@@ -29,9 +29,7 @@
         <td>
           <%= movie.title %>
         </td>
-        <td>
-          <%= movie.rating %>
-        </td>
+        <td><%= movie.rating %></td>
         <td>
           <%= movie.release_date %>
         </td>
