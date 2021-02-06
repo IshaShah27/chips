@@ -12,10 +12,11 @@ byebug
     #@all_ratings = Movie.all_ratings
     if params[:ratings].has_key?nil
       @ratings_to_show = []
+      @movies = Movie.all
     else
       @ratings_to_show = params[:ratings].keys 
+      @movies = Movie.with_ratings(@ratings_to_show)
     end
-    @movies = Movie.with_ratings(@ratings_to_show)
   end
 
   def new
