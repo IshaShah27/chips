@@ -1,3 +1,4 @@
+debu
 class MoviesController < ApplicationController
 
   def show
