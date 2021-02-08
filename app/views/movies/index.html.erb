@@ -14,12 +14,28 @@
   <%= submit_tag 'Refresh', id: 'ratings_submit', class: 'btn btn-primary' %>
 <% end %>
 
+<%#puts @ratings_to_show%>
+
+<!-- Create hash-->
+    <!--#if params[:ratings] == nil-->
+<!--params[:ratings]-->
+
+<%def figurehash
+    @for_params = {}
+    if @ratings_to_show == []
+    @for_params = %w[G PG PG-13 R].each {|a| @for_params[a] = 1}
+    else
+    @for_params = @ratings_to_show.each {|a| @for_params[a] = 1} 
+    end
+    return @for_params
+  end%>
+
 <table class="table table-striped col-md-12" id="movies">
   <thead>
     <tr>
-      <th><%= link_to "Movie Title", :sort => "title", :class => @title_highlight %></th>
+      <th class="<%=@title_highlight%>"><%= link_to "Movie Title", movies_path(:sort => "title", :select => figurehash), :id => "title_header"%></th>
       <th>Rating</th>
-      <th><%= link_to "Release Date", :sort => "release_date", :class => @date_highlight %></th>
+      <th class="<%=@date_highlight%>"><%= link_to "Release Date", movies_path(:sort => "release_date", :select => figurehash), :id => "release_date_header" %></th>
       <th>More Info</th>
     </tr>
   </thead>
