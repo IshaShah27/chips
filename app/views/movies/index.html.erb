@@ -14,22 +14,6 @@
   <%= submit_tag 'Refresh', id: 'ratings_submit', class: 'btn btn-primary' %>
 <% end %>
 
-<%#puts @ratings_to_show%>
-
-<!-- Create hash-->
-    <!--#if params[:ratings] == nil-->
-<!--params[:ratings]-->
-
-<%def figurehash
-    @for_params = {}
-    if @ratings_to_show == []
-    @for_params = %w[G PG PG-13 R].each {|a| @for_params[a] = 1}
-    else
-    @for_params = @ratings_to_show.each {|a| @for_params[a] = 1} 
-    end
-    return @for_params
-  end%>
-
 <table class="table table-striped col-md-12" id="movies">
   <thead>
     <tr>

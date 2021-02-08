@@ -7,7 +7,7 @@ class MoviesController < ApplicationController
   end
   
   def index
-    @movies = Movie.all
+#     @movies = Movie.all
     
     # filtering
     @all_ratings = Movie.all_ratings
@@ -21,14 +21,30 @@ class MoviesController < ApplicationController
       session[:ratings] = params[:ratings]
     end
     
+    ########
+    # test
+    
+    if params[:ratings] == nil && session[:ratings] == nil
+      redirect_to movies_path(:ratings => Hash[@all_ratings.collect { |v| [v, '1'] }])
+    end
+    if params[:ratings] != nil && session[:ratings] == nil
+      session[:ratings] = params[:ratings]
+    end
+    if session[:ratings] != nil && params[:ratings] == nil
+      params[:ratings] = session[:ratings]
+    end
+    
+    
+    ########
+    
     if params[:ratings]==nil
-      @ratings_to_show = []
+      @ratings_to_show = @all_ratings
       @movies = Movie.all
-      @selected_ratings = @all_ratings
+      #@selected_ratings = @all_ratings
     else
       @ratings_to_show = params[:ratings].keys
       @movies = Movie.with_ratings(@ratings_to_show)
-      @selected_ratings = @ratings_to_show
+      #@selected_ratings = @ratings_to_show
     end
     
     # check what session sort selection is, and if nil, assign params and v.v.check
