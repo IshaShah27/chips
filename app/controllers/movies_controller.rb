@@ -12,10 +12,10 @@ class MoviesController < ApplicationController
     # filtering
     @all_ratings = Movie.all_ratings
     
-    # check what sessions is, and if nil, assign params and v.v.check
+    # check what session ratings selection is, and if nil, assign params and v.v.check
     if params[:ratings]==nil 
       if session[:ratings] != nil
-        params[:ratings] == session[:ratings]
+        params[:ratings] = session[:ratings]
       end
     else
       session[:ratings] = params[:ratings]
@@ -29,6 +29,15 @@ class MoviesController < ApplicationController
       @ratings_to_show = params[:ratings].keys
       @movies = Movie.with_ratings(@ratings_to_show)
       @selected_ratings = @ratings_to_show
+    end
+    
+    # check what session sort selection is, and if nil, assign params and v.v.check
+    if params[:sort]==nil 
+      if session[:sort] != nil
+        params[:sort] == session[:sort]
+      end
+    else
+      session[:sort] = params[:sort]
     end
     
     # sorting
